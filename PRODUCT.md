@@ -41,6 +41,10 @@ workspace-scoped, so the same service can serve other tenants without code chang
 
 ## Capabilities and Constraints
 
+- SPEC-003: amounts are exact `money` (`numeric(19,4)`) and quantities, unit prices and rates are
+  `decimal` (`numeric(30,10)`); both are JSON strings in responses (`"1234.5600"`). Currency fields
+  are ISO 4217 codes (three upper-case letters). `scope` is a free label the workspace defines (at
+  most 64 characters, default empty).
 - `/v1/assets`: list (filters `asset_type`, `status`; ordered by id), stats (grouped by one of
   those filters), get, get-by-legacy-id, create (with `Idempotency-Key`), patch (with
   `expected_version`), delete.
@@ -48,7 +52,7 @@ workspace-scoped, so the same service can serve other tenants without code chang
 - Asset rules: `name` (at most 200 characters) and `asset_type` are required; `asset_type` is one
   of content, code, audience, data, brand, system, network, ip; `status` is one of planning
   (default), building, active, maintenance, archived; `monthly_value` and `total_value` cannot be
-  negative; `currency` defaults to THB (at most 12 characters). Asset names are not unique.
+  negative; `currency` defaults to THB (ISO 4217). Asset names are not unique.
 - Metric rules: `asset_id` and `metric_date` are required; `asset_id` must be an asset of the same
   workspace (otherwise 422 `reference_not_found`); an asset has at most one metric row per day
   (409); `views` and `subscribers` are whole numbers from 0 and default to 0; `revenue` defaults

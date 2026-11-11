@@ -81,7 +81,7 @@ def test_a_negative_value_is_refused_on_asset_update(client, owner):
     assert (
         client.patch(path, headers=owner, json={"total_value": -1}).status_code == 422
     )
-    assert client.get(path, headers=owner).json()["total_value"] == 500
+    assert client.get(path, headers=owner).json()["total_value"] == "500.0000"
 
 
 def test_an_asset_with_metrics_cannot_be_deleted(client, owner):

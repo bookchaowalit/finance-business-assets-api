@@ -18,8 +18,8 @@ def test_asset_values_keep_their_decimal_value(client, owner):
     asset = create(
         client, owner, name="Decimals", monthly_value=99.5, total_value=1234.56
     ).json()
-    assert asset["monthly_value"] == 99.5
-    assert asset["total_value"] == 1234.56
+    assert asset["monthly_value"] == "99.5000"
+    assert asset["total_value"] == "1234.5600"
 
 
 def test_two_assets_may_share_a_name(client, owner):
@@ -44,7 +44,7 @@ def test_new_metric_defaults_to_zero_counts(client, owner):
     metric = response.json()
     assert metric["views"] == 0
     assert metric["subscribers"] == 0
-    assert metric["revenue"] == 0
+    assert metric["revenue"] == "0.0000"
     assert metric["engagement_rate"] is None
     assert metric["version"] == 1
 
