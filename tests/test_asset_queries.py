@@ -69,7 +69,7 @@ def test_an_asset_patch_that_changes_nothing_keeps_the_version(client, owner):
     same = client.patch(
         f"{ASSETS}/{asset['id']}",
         headers=owner,
-        json={"name": "Stable", "monthly_value": 10},
+        json={"name": "Stable", "monthly_value": 10, "expected_version": 1},
     )
     assert same.status_code == 200, same.text
     assert same.json()["version"] == 1
