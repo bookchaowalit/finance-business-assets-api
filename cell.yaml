@@ -5,6 +5,8 @@ cell: business-assets
 title: Business assets
 resources:
   asset:
+    # SPEC-005: reference data only in events (no amounts, names or notes).
+    graph: [asset_type, status, currency, launched_at]
     filters:
     - asset_type
     - status
@@ -54,6 +56,8 @@ resources:
       notes: &id001
         type: text
   asset-metric:
+    # SPEC-005: reference data only in events (no amounts, names or notes).
+    graph: [asset_id, metric_date]
     filters:
     - asset_id
     unique:
