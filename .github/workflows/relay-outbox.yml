@@ -50,6 +50,11 @@ jobs:
           BUSINESS_ASSETS_KAFKA_CA_PEM: ${{ secrets.BUSINESS_ASSETS_KAFKA_CA_PEM }}
           BUSINESS_ASSETS_KAFKA_USERNAME: ${{ secrets.BUSINESS_ASSETS_KAFKA_USERNAME }}
           BUSINESS_ASSETS_KAFKA_PASSWORD: ${{ secrets.BUSINESS_ASSETS_KAFKA_PASSWORD }}
+          # SPEC-002 signed events: the signing seed is a secret; the pinned public keys and the
+          # mode (off/report/enforce) are repository variables. Unset = unsigned, unchecked.
+          BUSINESS_ASSETS_EVENT_SIGNING_KEY: ${{ secrets.BUSINESS_ASSETS_EVENT_SIGNING_KEY }}
+          BUSINESS_ASSETS_EVENT_KEYS: ${{ vars.BUSINESS_ASSETS_EVENT_KEYS }}
+          BUSINESS_ASSETS_EVENT_SIGNATURES: ${{ vars.BUSINESS_ASSETS_EVENT_SIGNATURES }}
         run: |
           set +e
           .venv/bin/business-assets-relay > "$RUNNER_TEMP/relay.json" 2> "$RUNNER_TEMP/relay.err"
